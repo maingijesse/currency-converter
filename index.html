@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div class="container  my-5 mx-auto">
+      <div class="row">
+        <div class="col-md-6 ">
+          <label for="from">From</label>
+          <select class="form-control" v-model="From">
+            <option disabled value="">select currency</option>
+            <option v-for="currency in formattedCurrencies" :value="currency.id"
+              >{{currency.currencyName}}</option
+            >
+          </select>
+        </div>
+        <div class="col-md-6 ">
+          <label for="to">To</label>
+          <select class="form-control" v-model="To">
+            <option disabled value="">select currency</option>
+            <option v-for="currency in formattedCurrencies" :value="currency.id"
+              >{{currency.currencyName}}</option
+            >
+          </select>
+        </div>
+
+        <div class="col-md-6  offset-md-3">
+          <input
+            type="text"
+            class="form-control my-5"
+            placeholder="Amount"
+            v-model="amount"
+          />
+          <div class="text-center">
+            <button
+              class="btn btn-lg btn-dark"
+              @click="convertCurrency"
+              :disabled="disabled"
+            >
+              {{loading ? 'Converting...': 'Convert'}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-3">
+          <h1 class="text-center display-2 mt-5">
+            {{calculatedResult.toFixed(2)}}
+          </h1>
+        </div>
+      </div>
+      <p>{{From}}</p>
+      <p>{{To}}</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="js/sandbox.js"></script>
+  </body>
+</html>
